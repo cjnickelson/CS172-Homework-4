@@ -1,4 +1,5 @@
 #include<iostream>
+#include"Rectangle2D.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ int findSmallestElement(int*, int);
 
 int main()
 {
+
 	int nums;
 	determineSize(nums);
 	int* list = allocatearray(nums);
