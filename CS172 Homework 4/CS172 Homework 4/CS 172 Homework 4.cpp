@@ -5,10 +5,14 @@ using namespace std;
 void determineSize(int&);
 int* allocatearray(int);
 void fillarray(int*, int);
+void fillarray(int*, int, int[]);
 double calculateAverage(int*,int);
+void displayList(int*, int);
 int countAboveAverage(int*, int, int);
-// for exercise 11.3
+// for exercise 2
 int* doubleCapacity(const int*, int&);
+// for exercise 3
+int findSmallestElement(int*, int);
 
 int main()
 {
@@ -16,13 +20,7 @@ int main()
 	determineSize(nums);
 	int* list = allocatearray(nums);
 	fillarray(list, nums);
-	for (int i = 0; i < nums; i++)
-	{
-		if (list[i] == NULL)
-			cout << "Invalid ";
-		else
-			cout << *(list + i) << " ";
-	}
+	displayList(list, nums);
 	cout << endl;
 	double average = calculateAverage(list, nums);
 	cout << "Average is " << average << "." << endl;
@@ -30,14 +28,14 @@ int main()
 	cout << "There are " << count << " numbers above the average." << endl;
 
 	list = doubleCapacity(list, nums);
-	for (int i = 0; i < nums; i++)
-	{
-		if (list[i] == NULL)
-			cout << "Invalid ";
-		else
-			cout << *(list + i) << " ";
-	}
+	displayList(list, nums);
+	cout << endl;
 	delete list;
+	int* secondlist = allocatearray(8);
+	int values[8] = {1,2,4,5,10,100,2,-22};
+	fillarray(secondlist, 8, values);
+	int smallest = findSmallestElement(secondlist, 8);
+	cout << "The smallest value out of 1, 2, 4, 5, 10, 100, 2 and -22 is " << smallest << "." << endl;
 	return 0;
 }
 
@@ -65,6 +63,16 @@ void fillarray(int* pntrarray, int size)
 		i++;
 		cout << "Enter value #" << i << "." << endl;
 		cin >> *curr;
+	}
+}
+
+void fillarray(int* pntrarray, int size, int numbers[])
+{
+	int i = 0;
+	for (int* curr = pntrarray; curr<pntrarray+size; curr ++)
+	{
+		*curr = numbers[i];
+		i++;
 	}
 }
 
@@ -102,4 +110,26 @@ int* doubleCapacity(const int* list, int& size)
 	size *= 2;
 	delete list;
 	return newList;
+}
+
+void displayList(int* list, int nums)
+{
+	for (int i = 0; i < nums; i++)
+	{
+		if (list[i] == NULL)
+			cout << "Invalid ";
+		else
+			cout << *(list + i) << " ";
+	}
+}
+
+int findSmallestElement(int* pntrarray, int size)
+{
+	int smallest = *pntrarray;
+	for (int i = 1; i < size; i++)
+	{
+		if (*(pntrarray + i) < smallest)
+			smallest = *(pntrarray + i);
+	}
+	return smallest;
 }
