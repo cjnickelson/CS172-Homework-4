@@ -15,9 +15,10 @@ int* doubleCapacity(const int*, int&);
 // for exercise 3
 int findSmallestElement(int*, int);
 
+
+
 int main()
 {
-
 	int nums;
 	determineSize(nums);
 	int* list = allocatearray(nums);
@@ -38,6 +39,15 @@ int main()
 	fillarray(secondlist, 8, values);
 	int smallest = findSmallestElement(secondlist, 8);
 	cout << "The smallest value out of 1, 2, 4, 5, 10, 100, 2 and -22 is " << smallest << "." << endl;
+
+	Rectangle2D r1(2,2,5.5,4.9), r2(4,5,10.5,3.2),r3(3,5,2.3,5.4);
+	cout << "The area of r1 is " << r1.getArea() << " and its perimter is " << r1.getPerimeter() << "." << endl;
+	bool containspoint = r1.contains(3,3);
+	cout << "r1 " << (containspoint == true ? "contains " : "does not contain ") << "the point (3,3)." << endl;
+	bool containsrectangle = r1.contains(r2);
+	cout << "r1 " << (containsrectangle == true ? "contains " : "does not contain ") << "the rectangle r2." << endl;
+	bool overlapsrectangle = r1.overlaps(r3);
+	cout << "r1 " << (overlapsrectangle == true ? "overlaps " : "does not overlap ") << "the rectangle r3." << endl;
 	return 0;
 }
 
@@ -110,7 +120,7 @@ int* doubleCapacity(const int* list, int& size)
 		newList[i] = NULL;
 	}
 	size *= 2;
-	delete list;
+	delete [] list;
 	return newList;
 }
 

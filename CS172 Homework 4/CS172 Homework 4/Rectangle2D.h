@@ -17,6 +17,6 @@ public:
 	const double getArea();
 	const double getPerimeter();
 	const bool contains(double, double);
-	const bool contains(const Rectangle2D& r);
-	const bool overlaps(const Rectangle2D& r);
+	const bool contains(Rectangle2D& r);
+	const bool overlaps(Rectangle2D& r);
 };

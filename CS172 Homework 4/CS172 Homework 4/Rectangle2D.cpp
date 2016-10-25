@@ -66,11 +66,36 @@ const bool Rectangle2D::contains(double xc, double yc)
 	else
 		return false;
 }
-const bool Rectangle2D::contains(const Rectangle2D& r)
+const bool Rectangle2D::contains(Rectangle2D& r)
 {
-	
+	Rectangle2D* p = &r;
+	double leftmax = p->getX() - (p->getWidth() / 2);
+	double rightmax = p->getX() + (p->getWidth() / 2);
+	double lowest = p->getY() - (p->getHeight() / 2);
+	double highest = p->getY() + (p->getHeight() / 2);
+	double leftbound = x - width / 2;
+	double rightbound = x + width / 2;
+	double lowerbound = y - height / 2;
+	double upperbound = y + height / 2;
+	if (leftbound <= leftmax && rightmax <= rightbound && lowerbound <= lowest && highest <= upperbound)
+		return true;
+	else
+		return false;
 }
-const bool Rectangle2D::overlaps(const Rectangle2D& r)
+const bool Rectangle2D::overlaps(Rectangle2D& r)
 {
-	return false;
+	Rectangle2D* p = &r;
+	double leftmax = p->getX() - (p->getWidth() / 2);
+	double rightmax = p->getX() + (p->getWidth() / 2);
+	double lowest = p->getY() - (p->getHeight() / 2);
+	double highest = p->getY() + (p->getHeight() / 2);
+	double leftbound = x - width / 2;
+	double rightbound = x + width / 2;
+	double lowerbound = y - height / 2;
+	double upperbound = y + height / 2;
+	if (leftmax > rightbound || rightmax < leftbound || highest<lowerbound || lowest>upperbound)
+		return false;
+	else
+		return true;
+
 }
