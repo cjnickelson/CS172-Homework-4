@@ -7,6 +7,8 @@ int* allocatearray(int);
 void fillarray(int*, int);
 double calculateAverage(int*,int);
 int countAboveAverage(int*, int, int);
+// for exercise 11.3
+int* doubleCapacity(const int*, int&);
 
 int main()
 {
@@ -16,13 +18,26 @@ int main()
 	fillarray(list, nums);
 	for (int i = 0; i < nums; i++)
 	{
-		cout << *(list + i) << " ";
+		if (list[i] == NULL)
+			cout << "Invalid ";
+		else
+			cout << *(list + i) << " ";
 	}
 	cout << endl;
 	double average = calculateAverage(list, nums);
 	cout << "Average is " << average << "." << endl;
 	int count = countAboveAverage(list, nums, average);
 	cout << "There are " << count << " numbers above the average." << endl;
+
+	list = doubleCapacity(list, nums);
+	for (int i = 0; i < nums; i++)
+	{
+		if (list[i] == NULL)
+			cout << "Invalid ";
+		else
+			cout << *(list + i) << " ";
+	}
+	delete list;
 	return 0;
 }
 
@@ -71,4 +86,20 @@ int countAboveAverage(int* pntrarray, int size, int average)
 		count += (*(pntrarray+i) > average ? 1 : 0);
 	}
 	return count;
+}
+
+int* doubleCapacity(const int* list, int& size)
+{
+	int* newList = new int[2 * size];
+	for (int i = 0; i < size; i++)
+	{
+		*(newList + i) = *(list + i);
+	}
+	for (int i = size; i < 2 * size; i++)
+	{
+		newList[i] = NULL;
+	}
+	size *= 2;
+	delete list;
+	return newList;
 }
