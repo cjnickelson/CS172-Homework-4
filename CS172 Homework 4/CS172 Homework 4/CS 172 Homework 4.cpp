@@ -1,5 +1,6 @@
 #include<iostream>
 #include"Rectangle2D.h"
+#include"Course.h"
 
 using namespace std;
 
@@ -48,6 +49,20 @@ int main()
 	cout << "r1 " << (containsrectangle == true ? "contains " : "does not contain ") << "the rectangle r2." << endl;
 	bool overlapsrectangle = r1.overlaps(r3);
 	cout << "r1 " << (overlapsrectangle == true ? "overlaps " : "does not overlap ") << "the rectangle r3." << endl;
+
+	cout << "What is the maximum number of people who can take this class?" << endl;
+	int capacity;
+	cin >> capacity;
+	Course biology("biology", capacity);
+	string* roster = biology.addStudent("Haley",capacity, biology.getStudents());
+	roster = biology.addStudent("Bill", capacity, roster);
+	roster = biology.addStudent("Carl", capacity, roster);
+	biology.dropStudent("Bill", roster);
+	for (int i = 0; i < biology.getNumberOfStudents(); i++)
+	{
+		cout << roster[i]<<" ";
+	}
+	biology.clear(roster);
 	return 0;
 }
 
